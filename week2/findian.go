@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"strings"
@@ -8,11 +9,10 @@ import (
 
 func main() {
 	fmt.Println("Enter a string: ")
-	var input string
-	_, err := fmt.Scanln(&input)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Scan: %v\n", err)
-	}
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	input := scanner.Text()
+	// fmt.Println("captured: ", input)
 	low_input := strings.ToLower(input)
 	switch {
 	case strings.Index(low_input, "i") != 0:
