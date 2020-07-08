@@ -18,7 +18,7 @@ func main() {
 	switch {
 	case strings.Index(low_input, "i") != 0:
 		not_found = true
-	case strings.LastIndex(low_input, "n") != len(low_input) - 1:
+	case strings.LastIndex(low_input, "n") != len(low_input)-1:
 		not_found = true
 	case strings.Contains(low_input, "a") == false:
 		not_found = true
