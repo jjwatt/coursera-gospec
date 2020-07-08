@@ -12,6 +12,7 @@ import (
 func main() {
 	li := make([]int, 0, 3)
 	for {
+		fmt.Println("Pleaxe enter a number or 'X' to quit")
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Scan()
 		userin := scanner.Text()
@@ -22,7 +23,6 @@ func main() {
 		num, err := strconv.Atoi(lowin)
 		if err != nil {
 			fmt.Printf("Error: %v\n", err)
-			fmt.Println("Please enter a number or 'X' to quit")
 			continue
 		}
 		li = append(li, num)
