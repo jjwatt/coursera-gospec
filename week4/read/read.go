@@ -16,6 +16,13 @@ structs and print the first and last names found in each struct.
 
 package main
 
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
 type fullname struct {
 	fname string
 	lname string
@@ -23,10 +30,42 @@ type fullname struct {
 
 func main() {
 	var names []*fullname
-	var fname string
-	// Get filename
-	// Open file
-	// For each line in file, parse into fname, lname and add to a fullname struct,
-	// then append the fullname struct to the names slice.
-	// After reading all lines, for each struct in slice print fname and lname.
+	// An artificial input source.
+	// const input = "Jesse Wattenbarger\nJennifer Wattenbarger\nColette Wattenbarger\n"
+
+	// Get the input filename from the user.
+	fmt.Printf("Filename to read: ")
+	inputScanner := bufio.NewScanner(os.Stdin)
+	inputScanner.Scan()
+	inputFileName := inputScanner.Text()
+
+	// Open the file.
+	inputFile, err := os.Open(inputFileName)
+	if err != nil {
+		panic(err)
+	}
+	defer inputFile.Close()
+
+	// Build the scanner from the artificial input source for testing.
+	// scanner := bufio.NewScanner(strings.NewReader(input))
+
+	// Build the scanner from the file to pass the assignment requirements.
+	scanner := bufio.NewScanner(inputFile)
+
+	// Iterate through the scanner, splitting up lines and building structs.
+	for scanner.Scan() {
+		line := scanner.Text()
+		tokens := strings.Split(line, " ")
+		f := &fullname{fname: tokens[0], lname: tokens[1]}
+		names = append(names, f)
+	}
+	if err := scanner.Err(); err != nil {
+		fmt.Fprintln(os.Stderr, "reading input:", err)
+	}
+
+	// Iterate through the slice of structs and print out fname and lname.
+	for _, name := range names {
+		fmt.Printf("%v %v\n", name.fname, name.lname)
+	}
+	os.Exit(0)
 }
