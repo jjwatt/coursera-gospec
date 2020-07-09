@@ -16,6 +16,17 @@ structs and print the first and last names found in each struct.
 
 package main
 
-func main() {
+type fullname struct {
+	fname string
+	lname string
+}
 
+func main() {
+	var names []*fullname
+	var fname string
+	// Get filename
+	// Open file
+	// For each line in file, parse into fname, lname and add to a fullname struct,
+	// then append the fullname struct to the names slice.
+	// After reading all lines, for each struct in slice print fname and lname.
 }
